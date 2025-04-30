@@ -5,7 +5,52 @@ Este projeto foi desenvolvido para automatizar a criação, consulta e exclusão
 --> Importante: O token de autenticação necessário para interagir com a API do GitHub deve ser inserido diretamente no arquivo github_api_flow.cy.js. <--
 --> O token foi enviado por email e deve ser colocado no local apropriado no código para garantir que os testes funcionem corretamente. <--
 
-Passo a Passo para Rodar o Projeto:
+--Plano de Testes - Projeto GitHub API
+
+-Site escolhido: GitHub
+
+-Escopo dos testes: Os testes automatizados foram desenvolvidos para validar funcionalidades básicas da API do GitHub 
+relacionadas à criação, leitura e exclusão de repositórios e issues.
+
+-História do Usuário
+Como usuário autenticado da API do GitHub,
+Quero criar e gerenciar repositórios e issues automaticamente,
+para facilitar fluxos de integração e testes contínuos.
+
+-Critérios de Aceite
+Deve ser possível criar um repositório público.
+Deve ser possível consultar os dados do repositório criado.
+Deve ser possível criar uma issue no repositório.
+Deve ser possível consultar a issue criada.
+Deve ser possível excluir o repositório.
+A consulta ao repositório excluído deve retornar status 404.
+
+-Casos de Testes
+Criação de repositório com sucessoResultado esperado: status 201 e nome correto do repositório.
+Consulta de repositório existenteResultado esperado: status 200 e nome igual ao criado.
+Criação de issue com sucessoResultado esperado: status 201 e título igual ao enviado.
+Consulta da issue criadaResultado esperado: status 200, lista com pelo menos uma issue e título da primeira igual ao criado.
+Exclusão de repositórioResultado esperado: status 204.
+Consulta de repositório excluídoResultado esperado: status 404.
+
+-Estimativa de Tempo - Teste Manual
+Cada passo manual envolveria:
+Autenticação via token e ferramentas como Postman (1 minuto)
+Criação e consulta de repositório (2 minutos)
+Criação e consulta de issue (2 minutos)
+Exclusão do repositório e nova consulta (2 minutos)
+
+Tempo total estimado manualmente: ~7 minutos
+
+-Estimativa de Tempo - Teste Automatizado
+Os testes com Cypress são sequenciais e rápidos.Com a execução headless em CI:
+
+Execução completa: < 10 segundos
+
+
+
+
+--Passo a Passo para Rodar o Projeto:
 
 - Baixar o Projeto
 
