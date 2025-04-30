@@ -3,15 +3,12 @@ describe('Fluxo completo - GitHub API', () => {
     const token = '';  // Enviado por email.
     const username = 'contadetrabalhoricardo'; // Nome de usuário do GitHub
     const repoName = 'TestesDOTDigital'; // Nome do repositório utilizado nos testes
-                                      
-                      //Foi criada uma conta nova somente para esses testes.
-  
+
    // Headers usados em todas as requisições autenticadas
    const authHeaders = {
-    Authorization: token ${token},
+    Authorization: `token ${token}`,  // Usando template string com backticks
     Accept: 'application/vnd.github+json'
   };
-  
   
   it('Criação de um repositório no GitHub', () => {
     cy.request({
@@ -25,15 +22,14 @@ describe('Fluxo completo - GitHub API', () => {
       }
     }).then((response) => {
       expect(response.status).to.eq(201); // Verifica se foi criado com sucesso
-      expect(response.body).to.have.property('full_name', ${username}/${repoName}); // Verifica o nome completo
+      expect(response.body).to.have.property('full_name', `${username}/${repoName}`); // Verifica o nome completo
     });
   });
-  
   
   it('Consulta o repositório criado', () => {
     cy.request({
       method: 'GET',
-      url: ${BASE_URL}/${username}/${repoName},
+      url: `${BASE_URL}/${username}/${repoName}`,  // Usando template string
       headers: authHeaders
     }).then((response) => {
       expect(response.status).to.eq(200); // Deve retornar com sucesso
@@ -41,11 +37,10 @@ describe('Fluxo completo - GitHub API', () => {
     });
   });
   
-  
   it('Criação de uma issue no repositório', () => {
     cy.request({
       method: 'POST',
-      url: ${BASE_URL}/${username}/${repoName}/issues,
+      url: `${BASE_URL}/${username}/${repoName}/issues`, // Usando template string
       headers: authHeaders,
       body: {
         title: 'Issue teste',
@@ -64,7 +59,7 @@ describe('Fluxo completo - GitHub API', () => {
   it('Consulta a issue criada', () => {
     cy.request({
       method: 'GET',
-      url: ${BASE_URL}/${username}/${repoName}/issues,
+      url: `${BASE_URL}/${username}/${repoName}/issues`,  // Usando template string
       headers: authHeaders
     }).then((response) => {
       expect(response.status).to.eq(200); // Resposta OK
@@ -77,7 +72,7 @@ describe('Fluxo completo - GitHub API', () => {
   it('Exclusão do repositório', () => {
     cy.request({
       method: 'DELETE',
-      url: ${BASE_URL}/${username}/${repoName},
+      url: `${BASE_URL}/${username}/${repoName}`,  // Usando template string
       headers: authHeaders
     }).then((response) => {
       expect(response.status).to.eq(204); // Resposta de sucesso sem conteúdo
@@ -88,11 +83,11 @@ describe('Fluxo completo - GitHub API', () => {
   it('Verifica se o repositório foi excluído', () => {
     cy.request({
       method: 'GET',
-      url: ${BASE_URL}/${username}/${repoName},
+      url: `${BASE_URL}/${username}/${repoName}`,  // Usando template string
       headers: authHeaders,
       failOnStatusCode: false // Não falha mesmo se o status for 404
     }).then((response) => {
       expect(response.status).to.eq(404); // Repositório não deve existir mais
     });
   });
-  });
+});
