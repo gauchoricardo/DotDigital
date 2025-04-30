@@ -1,0 +1,32 @@
+{
+  "name": "testes-github",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gauchoricardo/DotDigital.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/gauchoricardo/DotDigital/issues"
+  },
+  "homepage": "https://github.com/gauchoricardo/DotDigital#readme",
+  "devDependencies": {
+    "cypress": "^14.3.2",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^5.0.0",
+    "mochawesome-report-generator": "^6.2.0"
+  }
+ 
+ "scripts": {
+  "test": "cypress run",
+  "report": "npx mochawesome-merge cypress/reports/*.json | npx mochawesome-report-generator --reportDir cypress/reports/html"
+}
+}
